@@ -7,20 +7,100 @@
     <title>Image Process POC</title>
   </head>
   <body>
+    <style>
+      .video-wrapper {
+        position: relative;
+        display: flex;
+      }
+
+      .video-wrapper__video {
+        width: 100%;
+        height: 300px;
+        border: 2px solid red;
+      }
+
+      .video-wrapper__button {
+        position: absolute;
+        transform: translate(-50%, 0);
+        left: 50%;
+        bottom: 5px;
+        background-color: blueviolet;
+        width: 60px;
+        height: 60px;
+        border-radius: 100%;
+        padding: 0;
+        border: none;
+        cursor: pointer;
+      }
+
+      .video-wrapper__left-line,
+      .video-wrapper__right-line {
+        background-color: yellow;
+        width: 5px;
+        height: 100%;
+        position: absolute;
+      }
+
+      .video-wrapper__left-line {
+        left: 30%;
+      }
+
+      .video-wrapper__right-line {
+        right: 30%;
+      }
+
+      .video-wrapper__middle-line {
+        background-color: greenyellow;
+        width: 40%;
+        height: 5px;
+        position: absolute;
+        top: 50%;
+        left: 30%;
+      }
+    </style>
     <section>
       <h2>Using inputs</h2>
+      <p>
+        In Desktop they will behave as a normal input files, but in mobile we
+        would have access to more options including access directly to the
+        camera
+      </p>
       <input type="file" name="image" accept="image/*" capture="environment" />
       <input type="file" accept="image/*" capture="user" />
     </section>
     <section>
       <h2>Using <code>getUserMedia</code></h2>
-      <button onclick="enableGetUserMedia()">Enable</button>
-      <video id="video" autoplay></video>
+      <button id="user-media-button">
+        Enable
+      </button>
+      <br />
+      <br />
+      <div class="video-wrapper">
+        <div class="video-wrapper__left-line"></div>
+        <div class="video-wrapper__middle-line"></div>
+        <div class="video-wrapper__right-line"></div>
+        <video
+          class="video-wrapper__video"
+          id="video"
+          playsinline
+          muted
+          autoplay
+        ></video>
+        <button
+          id="take-picture-button"
+          class="video-wrapper__button"
+          aria-label="Take a picture"
+        ></button>
+      </div>
     </section>
     <section>
       <h2>Getting Device Orientation</h2>
       <p id="orientation-data"></p>
+      <p id="orientation"></p>
+      <button id="device-orientation-button">
+        Enable Device Orientation
+      </button>
     </section>
-    <script defer src="./index.js"></script>
+    <script src="./index.js"></script>
   </body>
 </html>
